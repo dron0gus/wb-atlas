@@ -137,9 +137,7 @@ static SecondaryChannelThread secondaryChannelThread;
 
 void InitUart()
 {
-#ifdef DEBUG_SERIAL_PORT
     chThdCreateStatic(waUartThread, sizeof(waUartThread), NORMALPRIO, UartThread, nullptr);
-#endif
 #ifdef TS_ENABLED
     primaryChannelThread.Start();
 #ifdef TS_SECONDARY_SERIAL_PORT
