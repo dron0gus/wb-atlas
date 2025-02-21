@@ -7,8 +7,8 @@ MEMORY
     /* empty section to keep linker happy */
     blflash (rx) : org = 0x08000000, len = 0
 /*    appflash (rx) : org = DEFINED(USE_BOOTLOADER) ? (0x08000000 + 8k) : 0x08000000, len = DEFINED(USE_BOOTLOADER) ? (32k - 8k - 8k) : (32k - 8k) */
-    appflash (rx) : org = 0x08000000, len = 24k
-    configflash (rx) : org = 0x08000000 + 32k - 8k, len = 8k
+    appflash (rx) : org = 0x08000000, len = 26k
+    configflash (rx) : org = 0x08000000 + 32k - 6k, len = 6k
     flash1 (rx) : org = 0x00000000, len = 0
     flash2 (rx) : org = 0x00000000, len = 0
     flash3 (rx) : org = 0x00000000, len = 0

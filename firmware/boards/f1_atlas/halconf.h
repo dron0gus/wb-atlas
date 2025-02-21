@@ -51,7 +51,7 @@
  * @brief   Enables the CAN subsystem.
  */
 #if !defined(HAL_USE_CAN) || defined(__DOXYGEN__)
-#define HAL_USE_CAN                         FALSE
+#define HAL_USE_CAN                         TRUE
 #endif
 
 /**
@@ -72,7 +72,7 @@
  * @brief   Enables the EFlash subsystem.
  */
 #if !defined(HAL_USE_EFL) || defined(__DOXYGEN__)
-#define HAL_USE_EFL                         FALSE
+#define HAL_USE_EFL                         TRUE
 #endif
 
 /**
