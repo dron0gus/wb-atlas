@@ -33,7 +33,7 @@
 #define NERNST_ADV_ESR_DRIVER_PIN	10
 
 // L_heater_pwm - PB7 TIM4_CH2
-#define HEATER_PWM_DEVICE			PWMD4
+#define HEATER_PWM_DEVICE			PWMD3
 #define HEATER_PWM_CHANNEL_0		1
 #define L_HEATER_PORT				GPIOB
 #define L_HEATER_PIN				7
