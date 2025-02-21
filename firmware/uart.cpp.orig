@@ -18,9 +18,8 @@
 #define PORT_EXTRA_SERIAL_CR2 0
 #endif
 
-//#ifdef DEBUG_SERIAL_PORT
+#ifdef DEBUG_SERIAL_PORT
 
-#define DEBUG_SERIAL_BAUDRATE 115200
 SerialConfig cfg = {
     .speed = DEBUG_SERIAL_BAUDRATE,
     .cr1 = 0,
@@ -93,7 +92,7 @@ static void UartThread(void*)
     }
 }
 
-//#endif /* DEBUG_SERIAL_PORT */
+#endif /* DEBUG_SERIAL_PORT */
 
 #ifdef TS_ENABLED
 
