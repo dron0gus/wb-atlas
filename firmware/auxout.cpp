@@ -183,7 +183,9 @@ void InitAuxDac()
     SetAuxDac(0, 0.0);
 #endif
 
+#if defined(AUXOUT_DAC_PWM_DEVICE) || defined(AUXOUT_DAC_DEVICE)
     chThdCreateStatic(waAuxOutThread, sizeof(waAuxOutThread), NORMALPRIO, AuxOutThread, nullptr);
+#endif
 }
 
 #else /* (AUXOUT_DAC_PWM_DEVICE || AUXOUT_DAC_DEVICE) */
