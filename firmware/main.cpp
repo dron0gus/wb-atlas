@@ -42,7 +42,9 @@ int main() {
     startTunerStudioConnectivity();
 #endif
 
+#if HAL_USE_CAN
     InitCan();
+#endif
     InitUart();
     InitIndication();
 

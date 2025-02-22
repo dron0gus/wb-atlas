@@ -3,12 +3,15 @@
 #include "can.h"
 
 #include "fault.h"
-#include "can_helper.h"
 #include "heater_control.h"
 #include "lambda_conversion.h"
 #include "sampling.h"
 #include "pump_dac.h"
 #include "port.h"
+
+#if HAL_USE_CAN
+
+#include "can_helper.h"
 
 // this same header is imported by rusEFI to get struct layouts and firmware version
 #include "../for_rusefi/wideband_can.h"
@@ -195,3 +198,17 @@ __attribute__((weak)) void SendCanForChannel(uint8_t ch)
 {
     SendRusefiFormat(ch);
 }
+
+#else
+
+HeaterAllow GetHeaterAllowed()
+{
+    return HeaterAllow::Allowed;
+}
+
+float GetRemoteBatteryVoltage()
+{
+    return 13.7;
+}
+
+#endif // HAL_USE_CAN

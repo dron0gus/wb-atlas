@@ -2,24 +2,11 @@
 
 #include <cstdint>
 
+#if HAL_USE_CAN
+
 void InitCan();
 void SendCanData(float lambda, uint16_t measuredResistance);
 void SendRusefiFormat(uint8_t ch);
-
-enum class HeaterAllow {
-    // no CAN message telling us what to do has been rx'd
-    Unknown,
-
-    // We got a message, it said HEAT
-    Allowed,
-
-    // We got a message, it said NO HEAT
-    NotAllowed,
-};
-
-HeaterAllow GetHeaterAllowed();
-
-float GetRemoteBatteryVoltage();
 
 // implement this for your board if you want some non-standard behavior
 // default implementation simply calls SendRusefiFormat
@@ -41,3 +28,21 @@ void SendCanForChannel(uint8_t ch);
 #define CAN_EID(f) ((f).EID)
 #define CAN_ID(f) ((f).IDE ? CAN_EID(f) : CAN_SID(f))
 #endif
+
+#endif // HAL_USE_CAN
+
+enum class HeaterAllow {
+    // no CAN message telling us what to do has been rx'd
+    Unknown,
+
+    // We got a message, it said HEAT
+    Allowed,
+
+    // We got a message, it said NO HEAT
+    NotAllowed,
+};
+
+// Now these two are dummies
+// TODO: disable on users side
+HeaterAllow GetHeaterAllowed();
+float GetRemoteBatteryVoltage();

@@ -1,8 +1,10 @@
-#include "can_helper.h"
-
 #include <cstring>
 
 #include "can.h"
+
+#if HAL_USE_CAN
+
+#include "can_helper.h"
 
 CanTxMessage::CanTxMessage(uint32_t eid, uint8_t dlc, bool isExtended) {
     CAN_EXT(m_frame) = isExtended ? CAN_IDE_EXT : CAN_IDE_STD;
@@ -31,3 +33,4 @@ CanTxMessage::~CanTxMessage() {
 uint8_t& CanTxMessage::operator[](size_t index) {
     return m_frame.data8[index];
 }
+#endif // HAL_USE_CAN

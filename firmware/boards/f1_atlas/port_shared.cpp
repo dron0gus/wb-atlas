@@ -1,5 +1,6 @@
 #include "port_shared.h"
 
+#if HAL_USE_CAN
 // board-specific stuff shared between bootloader and firmware
 /* Dave horrible - disable since no CAN */
 
@@ -14,3 +15,4 @@ static const CANConfig canConfig500 =
 const CANConfig& GetCanConfig() {
     return canConfig500;
 }
+#endif // HAL_USE_CAN
