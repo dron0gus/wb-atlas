@@ -2,6 +2,10 @@
 
 #include <cstdint>
 
+#ifndef HAL_USE_CAN
+    #define HAL_USE_CAN FALSE
+#endif
+
 #if HAL_USE_CAN
 
 void InitCan();
