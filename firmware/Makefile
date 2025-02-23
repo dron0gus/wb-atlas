@@ -56,6 +56,10 @@ ifeq ($(USE_BOOTLOADER),)
   USE_BOOTLOADER = no
 endif
 
+ifeq ($(ENABLE_TS),)
+  ENABLE_TS = no
+endif
+
 #
 # Build global options
 ##############################################################################
@@ -162,14 +166,16 @@ CPPSRC = $(ALLCPPSRC) \
           heater_thread.cpp \
           main.cpp
 
-ifneq ($(ENABLE_TS),)
-CPPSRC += console/binary/tunerstudio.cpp \
-          console/binary/tunerstudio_io.cpp \
-          console/binary/tunerstudio_io_serial.cpp \
-          console/binary/tunerstudio_commands.cpp \
-          livedata.cpp \
+ifeq ($(ENABLE_TS),yes)
+  CPPSRC += console/binary/tunerstudio.cpp \
+            console/binary/tunerstudio_io.cpp \
+            console/binary/tunerstudio_io_serial.cpp \
+            console/binary/tunerstudio_commands.cpp \
+            livedata.cpp \
 
-DDEFS += -DTS_ENABLED=TRUE
+  DDEFS += -DTS_ENABLED=TRUE
+else
+  DDEFS += -DTS_ENABLED=FALSE
 endif
 
 # List ASM source files here.
