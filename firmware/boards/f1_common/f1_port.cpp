@@ -37,6 +37,16 @@ static const MFSConfig mfscfg1 = {
     .bank1_start      = 124U,
     .bank1_sectors    = 4U
 #endif
+#ifdef STM32F103x6
+    /* 32K flash device with 1K pages
+     * use last 6 pages for settinfs
+     * one bank is 3K */
+    .bank_size        = 3072U,
+    .bank0_start      = 26U,
+    .bank0_sectors    = 3U,
+    .bank1_start      = 29U,
+    .bank1_sectors    = 3U,
+#endif
 };
 
 static MFSDriver mfs1;
