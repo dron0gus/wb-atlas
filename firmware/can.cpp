@@ -203,12 +203,7 @@ __attribute__((weak)) void SendCanForChannel(uint8_t ch)
 
 HeaterAllow GetHeaterAllowed()
 {
-    return HeaterAllow::Allowed;
-}
-
-float GetRemoteBatteryVoltage()
-{
-    return 13.7;
+    return HeaterAllow::Unknown;
 }
 
 #endif // HAL_USE_CAN
