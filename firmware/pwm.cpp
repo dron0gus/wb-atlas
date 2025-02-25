@@ -28,7 +28,7 @@ void Pwm::Start(const PWMConfig& config)
 void Pwm::SetDuty(int channel, float duty) {
     auto dutyFloat = clampF(0, duty, 1);
     m_dutyFloat[channel] = dutyFloat;
-    pwmcnt_t highTime = m_counterPeriod * dutyFloat;
+    pwmcnt_t highTime = (m_counterPeriod - 1) * dutyFloat;
 
     pwmEnableChannel(m_driver, channel, highTime);
 }
