@@ -19,12 +19,6 @@
 #define NERNST_INPUT_GAIN (3.0f)
 
 // *******************************
-//        Battery Sensing
-// *******************************
-// 100K + 10K divider
-#define BATTERY_INPUT_DIVIDER (10.0 / (10.0 + 100.0))
-
-// *******************************
 //     Heater low side Sensing
 // *******************************
 // 100K + 10K divider
