@@ -6,15 +6,51 @@
 #include "port.h"
 #include "sampling.h"
 
+#ifdef HEATER_PWM_GPIO_PROXY
+
+// This callback is invoked on the channel compare event.
+static void ch0_callback(PWMDriver *pwmp)
+{
+    palClearPad(L_HEATER_PORT, L_HEATER_PIN);
+}
+
+#if AFR_CHANNELS >= 2
+static void ch1_callback(PWMDriver *pwmp)
+{
+    palClearPad(R_HEATER_PORT, R_HEATER_PIN);
+}
+#else
+#define ch1_callback nullptr
+#endif
+
+//This callback is invoked on PWM counter rese
+static void start_callback(PWMDriver *pwmp)
+{
+    if (pwmp->tim->CCR[0] != 0)
+        palSetPad(L_HEATER_PORT, L_HEATER_PIN);
+#if AFR_CHANNELS >= 2
+    if (pwmp->tim->CCR[1] != 0)
+        palSetPad(R_HEATER_PORT, R_HEATER_PIN);
+#endif
+}
+
+#else
+
+#define ch0_callback    nullptr
+#define ch1_callback    nullptr
+#define start_callback  nullptr
+
+#endif // HEATER_PWM_GPIO_PROXY
+
 // 400khz / 1024 = 390hz PWM
 static Pwm heaterPwm(HEATER_PWM_DEVICE);
 static const PWMConfig heaterPwmConfig = {
     .frequency = 400'000,
     .period = 1024,
-    .callback = nullptr,
+    .callback = start_callback,
     .channels = {
-        {PWM_OUTPUT_ACTIVE_HIGH | PWM_COMPLEMENTARY_OUTPUT_ACTIVE_LOW, nullptr},
-        {PWM_OUTPUT_ACTIVE_HIGH | PWM_COMPLEMENTARY_OUTPUT_ACTIVE_LOW, nullptr},
+        {PWM_OUTPUT_ACTIVE_HIGH | PWM_COMPLEMENTARY_OUTPUT_ACTIVE_LOW, ch0_callback},
+        {PWM_OUTPUT_ACTIVE_HIGH | PWM_COMPLEMENTARY_OUTPUT_ACTIVE_LOW, ch1_callback},
         {PWM_OUTPUT_ACTIVE_HIGH | PWM_COMPLEMENTARY_OUTPUT_ACTIVE_LOW, nullptr},
         {PWM_OUTPUT_ACTIVE_HIGH | PWM_COMPLEMENTARY_OUTPUT_ACTIVE_LOW, nullptr}
     },
