@@ -32,14 +32,17 @@
 #define NERNST_ADV_ESR_DRIVER_PORT	GPIOB
 #define NERNST_ADV_ESR_DRIVER_PIN	10
 
-// L_heater_pwm - PB7 TIM4_CH2
 #define HEATER_PWM_DEVICE			PWMD3
-#define HEATER_PWM_CHANNEL_0		1
+#define HEATER_PWM_CHANNEL_0		0
+#define HEATER_PWM_CHANNEL_1		1
+
+// This board with current MCU is not able to output PWM signals to pins used for Heater MOSFETs
+// Using IRQ -> GPIO proxy
+#define HEATER_PWM_GPIO_PROXY		1
+// L_heater_pwm - PB7
 #define L_HEATER_PORT				GPIOB
 #define L_HEATER_PIN				7
-
-// R_heater_pwm - PB6 TIM4_CH1
-#define HEATER_PWM_CHANNEL_1		0
+// R_heater_pwm - PB6
 #define R_HEATER_PORT				GPIOB
 #define R_HEATER_PIN				6
 

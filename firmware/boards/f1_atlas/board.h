@@ -103,8 +103,8 @@
  * PB3  - SPI1_SCK                  (output puspull, alternate, 50 MHz)
  * PB4  - SPI1_MISO                 (digital input, alternate)
  * PB5  - SPI1_MOSI                 (output puspull, alternate, 50 MHz)
- * PB6  - R_heater_pwm              (output pushpull, alternate, 2 MHz)
- * PB7  - L_heater_pwm              (output pushpull, alternate, 2 MHz)
+ * PB6  - R_heater_pwm              (digital output, 50 MHz)
+ * PB7  - L_heater_pwm              (digital output, 50 MHz)
  * PB8  - I2C1_SCL                  (output pushpull, alternate, 50 MHz)
  * PB9  - I2C1_SDA                  (output OD, alternate, 50 MHz)
  * PB10 - Nernsr_ADV_esr_drive      (digital input, no pull) - keep high-Z after power on
@@ -114,9 +114,9 @@
  * PB14 - PWMout2                   (output pushpull, alternate, 2 Mhz).
  * PB15 - PWMout1                   (output pushpull, alternate, 2 Mhz).
  */
-#define VAL_GPIOBCRL            0xAAB8B200      /*  PB7...PB0 */
+#define VAL_GPIOBCRL            0x33B8B200      /*  PB7...PB0 */
 #define VAL_GPIOBCRH            0xAA24348B      /* PB15...PB8 */
-#define VAL_GPIOBODR            0x0000FFFF
+#define VAL_GPIOBODR            0x0000FF3F
 
 /*
  * Port C setup. (only PC13..PC15 exist on 48-pin package)
