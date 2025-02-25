@@ -199,7 +199,9 @@ void HeaterControllerBase::Update(const ISampler& sampler, HeaterAllow heaterAll
     float sensorEsr = sampler.GetSensorInternalResistance();
     float sensorTemperature = sampler.GetSensorTemperature();
 
-    #ifdef BOARD_HAS_VOLTAGE_SENSE
+    #if defined(HEATER_INPUT_DIVIDER)
+        float heaterSupplyVoltage = sampler.GetInternalHeaterVoltage();
+    #elif defined(BOARD_HAS_VOLTAGE_SENSE)
         float heaterSupplyVoltage = GetSupplyVoltage();
     #else // not BOARD_HAS_VOLTAGE_SENSE
         // If we haven't heard from the ECU, use the internally sensed
